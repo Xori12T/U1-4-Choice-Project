@@ -78,4 +78,8 @@ public class player {
         return damage;
     }
 
+    public String toString(){
+        return name + " of " + grade + "th grade, with health " + health + " and " + damage + " damage. ";
+    }
+
 }
