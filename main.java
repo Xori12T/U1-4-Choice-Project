@@ -30,17 +30,27 @@ public class main {
             println("...");
             sleep(250);
             cpl();
-            println("..˙");
+            println(".");
             sleep(250);
             cpl();
-            println(".˙.");
+            println("..");
             sleep(250);
             cpl();
-            println("˙..");
+            println("...");
             sleep(250);
             cpl();
             
         }
+    }
+
+    public static boolean battle(player play, opponent opp) {
+        boolean battle = true;
+        Scanner bi = new Scanner(System.in);
+        println(opp.getName() + " approaches! ");
+        while (battle) {
+
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -67,14 +77,7 @@ public class main {
         idle(1);
         println("And finally you face the indomitable Scottish Becker.");
         idle(1);
-        println("What grade are you? ");
-        temp = input.nextLine();
-        int grad = 0;
-        if (temp.contains("9")) grad = 9;
-        else if (temp.contains("10")) grad = 10;
-        else if (temp.contains("11")) grad = 11;
-        else grad = 12;
-        player mc = new player(nam, grad);
+        player mc = new player(nam, 100, 5);
         idle(1);
         println(mc.toString() + ", are you ready to face the trials set before you? ");
         temp = input.nextLine();
@@ -86,6 +89,11 @@ public class main {
             println("Too bad so sad.");
 
         } 
+
+        idle(1);
+        opponent goblin = new opponent("Goblin", 10, 2);
+        opponent belt = new opponent("Belt of Rami", 40, 8);
+
 
     }
 }
