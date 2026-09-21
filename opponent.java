@@ -1,8 +1,11 @@
+
+
 public class opponent {
 
     private int health = 0;
     private String name = "";
     private int damage = 0;
+    private String[] oppactions = {"Fight", "Guard", "Counter"};
     
 
     public opponent() {
@@ -56,6 +59,15 @@ public class opponent {
 
     public int getDamage() {
         return damage;
+    }
+
+    public String getAction() {
+        int choice = (int) (Math.random()*4);
+        return oppactions[choice];
+    }
+
+    public String toString(){
+        return name + " with " + health + " health and " + damage + " damage";
     }
 
     // public void defeat() {

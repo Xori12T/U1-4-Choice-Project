@@ -2,6 +2,7 @@ public class player {
     private String name = "";
     private int health = 100;
     private int damage = 0;
+    private String[] actions = {"Fight", "Guard", "Counter", "Heal", "Debuff", "Buff", "Check (doesn't consume action)"};
     
     public player() {
         name = "";
@@ -59,6 +60,20 @@ public class player {
 
     public String toString(){
         return name + " with " + health + " health and " + damage + " damage";
+    }
+
+    public String getAction(int c) {
+        return actions[c-1];
+    }
+
+    public void showActions() {
+        main.println("Your actions are: ");
+        for (int i = 0; i < actions.length ; i++)
+        main.println((i+1) + ": " + actions[i]);
+    }
+
+    public int hma() {
+        return actions.length;
     }
 
 }
