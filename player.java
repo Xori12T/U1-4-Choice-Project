@@ -1,5 +1,6 @@
 public class player {
     private String name = "";
+    private int maxhealth = 100;
     private int health = 100;
     private int damage = 0;
     private String[] actions = {"Fight", "Guard", "Counter", "Heal", "Debuff", "Check (doesn't consume action)"};
@@ -7,30 +8,35 @@ public class player {
     public player() {
         name = "";
         health = 100;
+        maxhealth = 100;
         damage = 0;
     }
 
-    public player(String nam, int heal, int dam) {
+    public player(String nam, int heal, int maxh, int dam) {
         name = nam;
         health = heal;
+        maxhealth = maxh;
         damage = dam;
     }
 
     public player(String nam) {
         name = nam;
         health = 100;
+        maxhealth = 100;
         damage = 10;
     }
 
-    public player(String nam, int heal) {
+    public player(String nam, int maxh) {
         name = nam;
-        health = heal;
+        health = maxh;
+        maxhealth = maxh;
         damage = 10;
     }
 
-    public player(int heal, int dam) {
+    public player(int maxh, int dam) {
         name = "";
-        health = heal;
+        health = maxh;
+        maxhealth = maxh;
         damage = dam;
     }
 
@@ -46,6 +52,10 @@ public class player {
         damage = dam;
     }
 
+    public void setMaxHealth(int maxh) {
+        maxhealth = maxh;
+    }
+
     public String getName() {
         return name;
     }
@@ -57,9 +67,12 @@ public class player {
     public int getDamage() {
         return damage;
     }
+    public int getMaxHealth() {
+        return maxhealth;
+    }
 
     public String toString(){
-        return name + " with " + health + " health and " + damage + " damage";
+        return name + " with currently" + health + " health, " + maxhealth + "max health and " + damage + " damage";
     }
 
     public String getAction(int c) {
