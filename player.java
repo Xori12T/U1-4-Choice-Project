@@ -2,7 +2,7 @@ public class player {
     private String name = "";
     private int health = 100;
     private int damage = 0;
-    private String[] actions = {"Fight", "Guard", "Counter", "Heal", "Debuff", "Buff", "Check (doesn't consume action)"};
+    private String[] actions = {"Fight", "Guard", "Counter", "Heal", "Debuff", "Check (doesn't consume action)"};
     
     public player() {
         name = "";

@@ -56,19 +56,22 @@ public class main {
                 println("What do you do? Enter a number. ");
                 play.showActions();
                 tes = bi.nextLine();
-                for (int i = 0; i < play.hma(); i++) {
-                    if (tes.contains(String.valueOf(i+1))) {
-                        tes = play.getAction(i);
+                try {
+                    if (Integer.valueOf(tes) < play.hma()) {
+                        tes = play.getAction(Integer.valueOf(tes));
                         cont = true;
                     }
-                }
+                }  catch (NumberFormatException e) {
+                    println("That's not a choice buddy.");
+                    sleep(2);
+                }   
+                
                 if (cont) continue;
                 println("That's not a choice buddy.");
                 sleep(2);
                 for (int i = 0; i <= play.hma(); i++) cpl();
                 
             }
-
 
             String oppact = opp.getAction();
             if (tes.equals("Fight")) {
