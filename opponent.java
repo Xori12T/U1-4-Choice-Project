@@ -62,7 +62,7 @@ public class opponent {
     }
 
     public String getAction() {
-        int choice = (int) (Math.random()*4);
+        int choice = (int) (Math.random()*3);
         return oppactions[choice];
     }
 

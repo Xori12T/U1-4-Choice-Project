@@ -1,3 +1,29 @@
+/*
+Commenter: Elle
+
+This is a really fun game. I tried the edge cases
+and it prevented me from breakin the game. There was an
+out-of-bound error I encountered, but William was able to resolve it. 
+I didn't notice any syntax and logical errors.
+I didn't run into infinite loops.
+
+Room for Improvement?
+Maybe adding more opponents the user could fight against
+*/
+
+
+/*
+Commenter: Akaran
+I didn't notice any errors or infinite loops.
+Maybe add a fight with one of the bosses and have random opponents like goblins and skeletonsleading up to it.
+game short but good
+u should add more delay between outputs
+
+Commenter: Darren
+No erros with infinite loops. Suggestions-add more fights maybe multiple opponents at the same time
+Good interesting game, good checking for valid inputs, nice waiting period that delays each action
+*/
+
 import java.util.Scanner;
 
 public class main {
@@ -44,6 +70,7 @@ public class main {
             
         }
     }
+
 public static boolean battle(player play, opponent opp, Scanner bi) {
     println("");
     println(opp.getName() + " approaches! ");
@@ -297,6 +324,8 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
             System.exit(0); 
         }
         
+
+
         opponent belt = new opponent("Belt of Rami", 40, 8);
         opponent men = new opponent("Men of Steds", 80, 15);
         opponent beck = new opponent("The Becker", 120, 25);

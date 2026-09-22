@@ -72,7 +72,7 @@ public class player {
     }
 
     public String toString(){
-        return name + " with currently" + health + " health, " + maxhealth + "max health and " + damage + " damage";
+        return name + " with currently " + health + " health, " + maxhealth + " max health and " + damage + " damage";
     }
 
     public String getAction(int c) {
