@@ -67,7 +67,7 @@ public class opponent {
     }
 
     public String toString(){
-        return name + " with " + health + " health and " + damage + " damage";
+        return name + " has " + health + " health and does " + damage + " damage";
     }
 
     // public void defeat() {

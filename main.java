@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class main {
 
+    public int easte = 0; 
+
     public static void println(Object ps) {
         System.out.println(ps);
     }
@@ -74,84 +76,76 @@ public class main {
             }
 
             String oppact = opp.getAction();
-            if (tes.equals("Fight")) {
-                println("You decided to fight! ");
-                if (oppact.equals("Guard")) {
-                    println(opp.getName() + " guarded. ");
-                    opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/2)));
-                    println("You dealt " + (play.getDamage()/2) + " damage. ");
-                    println(opp.getName() + " has " + opp.getHealth() + " health left. ");
-                } else if (oppact.equals("Counter")) {
-                    println(opp.getName() + " countered you! ");
-                    opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/5)));
-                    play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()/2))));
-                    println("You dealt " + (play.getDamage()/5) + " damage. ");
-                    println(opp.getName() + " has " + opp.getHealth() + " health left. ");
-                    println(opp.getName() + " dealt " + (opp.getDamage()/2) + " damage. ");
-                    println("You have " + play.getHealth() + " health left. ");
-                } else if (oppact.equals("Fight")) {
-                    println(opp.getName() + " decided to fight. ");
-                    opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage())));
-                    play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()))));
-                    println("You dealt " + (play.getDamage()) + " damage. ");
-                    println(opp.getName() + " has " + opp.getHealth() + " health left. ");
-                    println(opp.getName() + " dealt " + (opp.getDamage()) + " damage. ");
-                    println("You have " + play.getHealth() + " health left. ");
-                }
-            } else if (tes.equals("Guard")) {
-                println("You decided to guard! ");
-                if (oppact.equals("Guard")) {
-                    println(opp.getName() + " guarded. ");
-                    println("Nothing happened lol");
-                } else if (oppact.equals("Counter")) {
-                    println(opp.getName() + " countered. ");
-                    println("But there was nothing to counter. ");
-                } else if (oppact.equals("Fight")) {
-                    println(opp.getName() + " decided to fight. ");
-                    opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/2)));
-                    play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()))));
-                    println(opp.getName() + " dealt " + (opp.getDamage()/2) + " damage. ");
-                    println("You have " + play.getHealth() + " health left. ");
-                } 
-            } else if (tes.equals("Counter")) {
-                println("You decided to counter the next attack. ");
-                if (oppact.equals("Guard")) {
-                    println(opp.getName() + " guarded. ");
-                    println("Nothing happened lol");
-                } else if (oppact.equals("Counter")) {
-                    println(opp.getName() + " countered. ");
-                    println("Bro imagine missing both your counters lol ");
-                } else if (oppact.equals("Fight")) {
-                    println(opp.getName() + " got countered by you! ");
-                    opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/2)));
-                    play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()/5))));
-                    println("You dealt " + (play.getDamage()/2) + " damage. ");
-                    println(opp.getName() + " has " + opp.getHealth() + " health left. ");
-                    println(opp.getName() + " dealt " + (opp.getDamage()/5) + " damage. ");
-                    println(opp.getName() + " has " + play.getHealth() + " health left. ");
-                } else if (tes.equals("Heal")) {
-                    println("You decided to heal yourself. ");
+            boolean choose = false;
+            int ee = easte;
+            while (!choose) {
+                if (tes.equals("Fight")) {
+                    println("You decided to fight! ");
+                    choose = true;
                     if (oppact.equals("Guard")) {
                         println(opp.getName() + " guarded. ");
-                        println("but nothing happened. ");
+                        opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/2)));
+                        println("You dealt " + (play.getDamage()/2) + " damage. ");
+                        println(opp.getName() + " has " + opp.getHealth() + " health left. ");
                     } else if (oppact.equals("Counter")) {
-                        println(opp.getName() + " countered. ");
-                        println("Bro missed his counter lol.");
-                        println("You healed " + (play.getDamage()) + " health. ");
+                        println(opp.getName() + " countered you! ");
+                        opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/5)));
+                        play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()/2))));
+                        println("You dealt " + (play.getDamage()/5) + " damage. ");
+                        println(opp.getName() + " has " + opp.getHealth() + " health left. ");
+                        println(opp.getName() + " dealt " + (opp.getDamage()/2) + " damage. ");
                         println("You have " + play.getHealth() + " health left. ");
                     } else if (oppact.equals("Fight")) {
                         println(opp.getName() + " decided to fight. ");
+                        opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage())));
                         play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()))));
-                        println("You healed " + (play.getDamage()) + " health. ");
-                        println("You have " + play.getHealth() + " health left. ");
+                        println("You dealt " + (play.getDamage()) + " damage. ");
+                        println(opp.getName() + " has " + opp.getHealth() + " health left. ");
                         println(opp.getName() + " dealt " + (opp.getDamage()) + " damage. ");
                         println("You have " + play.getHealth() + " health left. ");
                     }
-                } else if (tes.equals("Buff")){
+                } else if (tes.equals("Guard")) {
+                    println("You decided to guard. ");
+                    choose = true;
+                    if (oppact.equals("Guard")) {
+                        println(opp.getName() + " guarded. ");
+                        println("Nothing happened lol");
+                    } else if (oppact.equals("Counter")) {
+                        println(opp.getName() + " countered. ");
+                        println("But there was nothing to counter. ");
+                    } else if (oppact.equals("Fight")) {
+                        println(opp.getName() + " decided to fight. ");
+                        opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/2)));
+                        play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()))));
+                        println(opp.getName() + " dealt " + (opp.getDamage()/2) + " damage. ");
+                        println("You have " + play.getHealth() + " health left. ");
+                    } 
+                } else if (tes.equals("Counter")) {
+                    println("You decided to counter the next attack. ");
+                    choose = true;
+                    if (oppact.equals("Guard")) {
+                        println(opp.getName() + " guarded. ");
+                        println("Nothing happened lol");
+                    } else if (oppact.equals("Counter")) {
+                        println(opp.getName() + " countered. ");
+                        println("Bro imagine missing both your counters lol ");
+                    } else if (oppact.equals("Fight")) {
+                        println(opp.getName() + " got countered by you! ");
+                        opp.setHealth((int) Math.ceil((opp.getHealth()-play.getDamage()/2)));
+                        play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()/5))));
+                        println("You dealt " + (play.getDamage()/2) + " damage. ");
+                        println(opp.getName() + " has " + opp.getHealth() + " health left. ");
+                        println(opp.getName() + " dealt " + (opp.getDamage()/5) + " damage. ");
+                        println(opp.getName() + " has " + play.getHealth() + " health left. ");
+                    }
+                } else if (tes.equals("Heal")) {
                     println("You decided to heal yourself. ");
+                    choose = true;
                     if (oppact.equals("Guard")) {
                         println(opp.getName() + " guarded. ");
                         println("but nothing happened. ");
+                        println("You healed " + (play.getDamage()) + " health. ");
+                        println("You have " + play.getHealth() + " health left. ");
                     } else if (oppact.equals("Counter")) {
                         println(opp.getName() + " countered. ");
                         println("Bro missed his counter lol.");
@@ -166,26 +160,62 @@ public class main {
                         println("You have " + play.getHealth() + " health left. ");
                     }
                 } else if (tes.equals("Debuff")) {
-                    println("You decided to heal yourself. ");
+                    println("You decided to debuff the enemy. ");
+                    choose = true;
                     if (oppact.equals("Guard")) {
                         println(opp.getName() + " guarded. ");
                         println("but nothing happened. ");
+                        if (opp.getDamage() > 2) {
+                            opp.setDamage(opp.getDamage() - 2);
+                            println("You debuffed " + opp.getName() + "'s damage by 2. ");
+                        }
+                        else {
+                            println("Yo bro he does like two damage why r u debuffing him. ");
+                            idle(1);
+                            println("r u scared or smth?");
+                            sleep(1000);
+                            choose = false;
+                        }
+                        
                     } else if (oppact.equals("Counter")) {
                         println(opp.getName() + " countered. ");
                         println("Bro missed his counter lol.");
-                        println("You healed " + (play.getDamage()) + " health. ");
-                        println("You have " + play.getHealth() + " health left. ");
+                        if (opp.getDamage() > 2) {
+                            opp.setDamage(opp.getDamage() - 2);
+                            println("You debuffed " + opp.getName() + "'s damage by 2. ");
+                        }
+                        else {
+                            println("Yo bro he does like two damage why r u debuffing him. ");
+                            idle(1);
+                            println("r u scared or smth?");
+                            sleep(1000);
+                            choose = false;
+                        }
                     } else if (oppact.equals("Fight")) {
                         println(opp.getName() + " decided to fight. ");
-                        play.setHealth((int) Math.floor((play.getHealth()-(opp.getDamage()))));
-                        println("You healed " + (play.getDamage()) + " health. ");
-                        println("You have " + play.getHealth() + " health left. ");
+                        if (opp.getDamage() > 2) {
+                            opp.setDamage(opp.getDamage() - 2);
+                            println("You debuffed " + opp.getName() + "'s damage by 2. ");
+                        }
+                        else {
+                            println("Yo bro he does like two damage why r u debuffing him. ");
+                            idle(1);
+                            println("r u scared or smth?");
+                            sleep(1000);
+                            choose = false;
+                        }
                         println(opp.getName() + " dealt " + (opp.getDamage()) + " damage. ");
                         println("You have " + play.getHealth() + " health left. ");
                     }
                 } else {
-                    //check
+                    ee++;
+                    println("You decided to check the enemy");
+                    println("Enemy: " + opp.toString());
+                    if (ee > 1) {
+
+                    }
                 }
+                
             }
             
 
@@ -237,6 +267,8 @@ public class main {
         battle(mc, goblin);
         
         opponent belt = new opponent("Belt of Rami", 40, 8);
+        opponent men = new opponent("Men of Steds", 80, 15);
+        opponent beck = new opponent("The Becker", 120, 25);
 
 
     }
