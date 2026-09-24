@@ -25,18 +25,22 @@ Good interesting game, good checking for valid inputs, nice waiting period that 
 */
 
 import java.util.Scanner;
+//scanner
 
 public class main {
 
     public static int easte = 0; 
+    //easter egg lol
 
     public static void println(Object ps) {
         System.out.println(ps);
     }
+    //substitue println
 
     public static void print(Object ps) {
         System.out.print(ps);
     }
+    //substitute print
 
     public static void sleep(int ms) {
         try {
@@ -46,11 +50,13 @@ public class main {
             // Handle the exception if the sleep is interrupted
             System.err.println("The sleep was interrupted!");
         }
+        //wait function
     }
 
     public static void cpl() {
         print("\033[1F\033[K");
         System.out.flush();
+        //clear previous line function
     }
 
     public static void idle(int seconds) {
@@ -67,11 +73,13 @@ public class main {
             println("...");
             sleep(250);
             cpl();
-            
+            //idle dialogue 
         }
     }
 
 public static boolean battle(player play, opponent opp, Scanner bi) {
+    //main battle loop
+    //uses the scanner bc creating another scanner would be inefficient
     println("");
     println(opp.getName() + " approaches! ");
     println("");
@@ -82,6 +90,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         String tes = null;
         while (true) {
             println("What do you do? Enter a number. ");
+            //gets player action
             play.showActions();
             String line = bi.nextLine();
 
@@ -107,6 +116,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
 
         int oHalf = (int) Math.floor(oD / 2.0);
         int oFifth = (int) Math.floor(oD / 5.0);
+        //sets damage
 
         boolean consumedTurn = true; 
         if ("Fight".equals(tes)) {
@@ -243,6 +253,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         if (!consumedTurn) {
             for (int i = 0; i <= play.hma() + 1; i++) cpl();
             continue;
+            //clears if u didn't use an action
         }
         play.setHealth(Math.max(0, Math.min(play.getHealth(), play.getMaxHealth())));
         opp.setHealth(Math.max(0, opp.getHealth()));
@@ -270,7 +281,6 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         println("And plus 10 damage. ");
         play.setDamage(play.getDamage() + 10);
         idle(1);
-        println("Battle ends");
         easte = ee;
         return true;
     }
@@ -278,6 +288,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String temp = "";
+        //dialogue
         idle(1);
         println("Hello! My name is Verity. I'm your personal helper friend!");
         idle(3);
@@ -325,7 +336,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         }
         
 
-
+        //didnt have time to implement these
         opponent belt = new opponent("Belt of Rami", 40, 8);
         opponent men = new opponent("Men of Steds", 80, 15);
         opponent beck = new opponent("The Becker", 120, 25);
