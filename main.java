@@ -100,6 +100,10 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
                 if (choice > 0 && choice <= play.hma()) {
                     tes = play.getAction(choice);
                     break; // valid input -> leave input loop
+                } else {
+                    println("That's not a valid choice buddy. ");
+                    sleep(2000);
+                    for (int i = 0; i <= play.hma() + 1; i++) cpl();
                 }
             } catch (NumberFormatException ignored) { 
                 println("That's not a choice buddy.");
@@ -118,7 +122,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         int oFifth = (int) Math.floor(oD / 5.0);
         //sets damage
 
-        boolean consumedTurn = true; 
+        boolean consumedTurn = false; 
         if ("Fight".equals(tes)) {
             println("You decided to fight! ");
             idle(1);
@@ -149,6 +153,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
                 println(opp.getName() + " dealt " + oD + " damage. ");
                 println("You have " + play.getHealth() + " health left. ");
             }
+            consumedTurn = true;
 
         } else if ("Guard".equals(tes)) {
             println("You decided to guard. ");
@@ -161,11 +166,11 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
                 println("But there was nothing to counter. ");
             } else { 
                 println(opp.getName() + " decided to fight. ");
-                opp.setHealth(Math.max(0, opp.getHealth() - pHalf));
-                play.setHealth(Math.max(0, play.getHealth() - oD));
-                println(opp.getName() + " dealt " + oD + " damage. ");
+                play.setHealth(Math.max(0, play.getHealth() - oHalf));
+                println(opp.getName() + " dealt " + oHalf + " damage. ");
                 println("You have " + play.getHealth() + " health left. ");
             }
+            consumedTurn = true;
 
         } else if ("Counter".equals(tes)) {
             println("You decided to counter the next attack. ");
@@ -186,6 +191,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
                 println(opp.getName() + " dealt " + oFifth + " damage. ");
                 println("You have " + play.getHealth() + " health left. ");
             }
+            consumedTurn = true;
 
         } else if ("Heal".equals(tes)) {
             println("You decided to heal yourself. ");
@@ -195,19 +201,42 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
             println("You healed " + healAmount + " health. ");
             println("You have " + play.getHealth() + " health left. ");
 
-            if ("Fight".equals(oppact)) {
-                idle(1);
+            if ("Guard".equals(oppact)) {
+                println(opp.getName() + " guarded. ");
+                println("Nothing happened lol");
+            } else if ("Counter".equals(oppact)) {
+                println(opp.getName() + " countered. ");
+                println("But there was nothing to counter.");
+            } else { 
+                println(opp.getName() + " decided to fight. ");
                 play.setHealth(Math.max(0, play.getHealth() - oD));
+                idle(1);
                 println(opp.getName() + " dealt " + oD + " damage. ");
                 println("You have " + play.getHealth() + " health left. ");
             }
+            consumedTurn = true;
 
         } else if ("Debuff".equals(tes)) {
             println("You decided to debuff the enemy. ");
             idle(1);
 
-            if ("Guard".equals(oppact) || "Counter".equals(oppact)) {
-                println(opp.getName() + " guarded/countered. ");
+            if ("Guard".equals(oppact)) {
+                println(opp.getName() + " guarded. ");
+                println("Nothing happened lol ");
+                idle(1);
+                if (oD > 2) {
+                    opp.setDamage(oD - 2);
+                    println("You debuffed " + opp.getName() + "'s damage by 2. ");
+                } else {
+                    println("Yo bro he does like two damage why r u debuffing him. ");
+                    idle(1);
+                    println("r u scared or smth?");
+                    sleep(1000);
+                    consumedTurn = false; 
+                }
+            } else if ("Counter".equals(oppact)) {
+                println(opp.getName() + " countered. ");
+                println("But there was nothing to counter.");
                 idle(1);
                 if (oD > 2) {
                     opp.setDamage(oD - 2);
@@ -266,6 +295,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         println("Skill issue lol. *laughing emoji*");
         idle(2);
         println("Bye. ");
+        easte = ee;
         return false;
     } else {
         println("Yo u won. ");
