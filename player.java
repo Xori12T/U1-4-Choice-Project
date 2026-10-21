@@ -3,7 +3,9 @@ public class player {
     private int maxhealth = 100;
     private int health = 100;
     private int damage = 0;
-    private String[] actions = {"Fight", "Guard", "Counter", "Heal", "Debuff", "Check (doesn't consume action)"};
+    private String[] actions = {"Fight", "Guard", "Counter", "Heal", "Debuff", "Check (doesn't consume action)", "Use Item"};
+    private item[] items = new item[15];
+    private int itemshad = 0;
     
     public player() {
         name = "";
@@ -88,5 +90,17 @@ public class player {
     public int hma() {
         return actions.length;
     }
+
+    public int getItemshad() {
+        return itemshad;
+    }
+
+    public void addItem(item i) {
+        if (itemshad < 15) {
+            items[itemshad] = i;
+        } else {
+            main.println("Your item storage is full. ");
+        }
+    }//i dont handle errors here, i only do it in main. i guess i should handle errors here too.
 
 }

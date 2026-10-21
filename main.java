@@ -29,6 +29,35 @@ import java.util.Scanner;
 
 public class main {
 
+    //added healing items as a class, players and only bosses can use them, and monsters and bosses drop them.
+    private static item soda = new item("Soda",5);
+    private static item curry = new item("Curry", 12);
+    private static item masonhair = new item("Mason's Hair", -7);
+    private static item lucashair = new item("Lucas's Hair", 20);
+    //rationale: i think eating mason's hair would hurt u, but lucas's hair is actually way more nutritional and heals 20 health irl too.
+    //evidence: personal experience
+    private static item chugjug = new item("ChugJug", 17);
+    private static item apple = new item("Apple", 1);
+    private static item motherboard = new item("Motherboard ASRock B550M PRO4 AMD B550 AMD AM4", 19);
+    private static item glass = new item("Glass Bottle", -2);
+    private static item chag = new item("Lake Chargoggagoggmanchauggagoggchaubunagungamaugg", 10);
+
+    private static item[] allitems = {soda, curry, chugjug, apple, motherboard, glass, lucashair, masonhair, chag};
+    private static item[] belti = {apple, apple, apple, apple, apple, motherboard, chag};
+    private static item[] sted = {lucashair, apple, glass, apple, chugjug, soda, chag, chag};
+    private static item[] bi = {motherboard,motherboard,motherboard,apple,chugjug,glass};
+
+    private static opponent goblin = new opponent("Goblin", 10, 2);
+    private static opponent masonhairspray = new opponent("Mason's Hairspray", 5, 50);
+    private static boss belt = new boss("Belt of Rami", 40, 8, belti);
+    private static opponent orc = new opponent("Orc", 20,52);
+    private static boss men = new boss("Men of Steds", 80, 15, sted);
+    private static boss beck = new boss("The Becker", 120, 25, bi);
+    private static opponent slime = new opponent("Slime", 30, 3);
+    private static opponent living_skeleton = new opponent("Skeleton", 15, 6);
+    private static opponent[] tl = {goblin, orc, slime, living_skeleton, masonhairspray};
+
+
     public static int easte = 0; 
     //easter egg lol
 
@@ -40,7 +69,6 @@ public class main {
     public static void print(Object ps) {
         System.out.print(ps);
     }
-    //substitute print
 
     public static void sleep(int ms) {
         try {
@@ -77,7 +105,7 @@ public class main {
         }
     }
 
-public static boolean battle(player play, opponent opp, Scanner bi) {
+    public static boolean battle(player play, opponent opp, Scanner bi) {
     //main battle loop
     //uses the scanner bc creating another scanner would be inefficient
     println("");
@@ -99,8 +127,8 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
                 choice = Integer.parseInt(line.trim());
                 if (choice > 0 && choice <= play.hma()) {
                     tes = play.getAction(choice);
-                    break; // valid input -> leave input loop
-                } else {
+                    break; // valid input means leave input loop
+                } else { //doesn't accept invalid input
                     println("That's not a valid choice buddy. ");
                     sleep(2000);
                     for (int i = 0; i <= play.hma() + 1; i++) cpl();
@@ -114,15 +142,17 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
 
         int pD = play.getDamage();
         int oD = opp.getDamage();
+        //pre calc damage
 
         int pHalf = (int) Math.ceil(pD / 2.0);
         int pFifth = (int) Math.ceil(pD / 5.0);
 
         int oHalf = (int) Math.floor(oD / 2.0);
         int oFifth = (int) Math.floor(oD / 5.0);
-        //sets damage
+        
 
         boolean consumedTurn = false; 
+        //battle logic
         if ("Fight".equals(tes)) {
             println("You decided to fight! ");
             idle(1);
@@ -243,7 +273,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
                     println("You debuffed " + opp.getName() + "'s damage by 2. ");
                 } else {
                     println("Yo bro he does like two damage why r u debuffing him. ");
-                    idle(1);
+                    idle(1); //doesn't consume turn if fail debuff
                     println("r u scared or smth?");
                     sleep(1000);
                     consumedTurn = false; 
@@ -268,6 +298,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         } else { 
             ee++;
             println("You decided to check the enemy");
+            //doesnt consume turn to check
             println("Enemy: " + opp.toString());
             if (ee > 10) {
                 println("You've checked the enemy more than 10 times. ");
@@ -286,6 +317,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         }
         play.setHealth(Math.max(0, Math.min(play.getHealth(), play.getMaxHealth())));
         opp.setHealth(Math.max(0, opp.getHealth()));
+        //makes sure health makes sense
     } 
 
     // result
@@ -311,13 +343,18 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         println("And plus 10 damage. ");
         play.setDamage(play.getDamage() + 10);
         idle(1);
+        int tirv = (int)(Math.random()* allitems.length);
+        println("Item dropped: " + allitems[tirv]);
+        if (play.getItemshad() < 14) {}
         easte = ee;
         return true;
     }
 }
+    //substitute print
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         String temp = "";
+        
         //dialogue
         idle(1);
         println("Hello! My name is Verity. I'm your personal helper friend!");
@@ -355,7 +392,7 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         idle(2);
         println("Look Out!! A Goblin!! ");
         idle(2);
-        opponent goblin = new opponent("Goblin", 10, 2);
+        
         if (battle(mc, goblin, input)) {
             println("Phew. You made it.");
             idle(1);
@@ -366,10 +403,8 @@ public static boolean battle(player play, opponent opp, Scanner bi) {
         }
         
 
-        //didnt have time to implement these
-        opponent belt = new opponent("Belt of Rami", 40, 8);
-        opponent men = new opponent("Men of Steds", 80, 15);
-        opponent beck = new opponent("The Becker", 120, 25);
+        
+
 
 
     }
