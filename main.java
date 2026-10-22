@@ -43,19 +43,20 @@ public class main {
     private static item chag = new item("Lake Chargoggagoggmanchauggagoggchaubunagungamaugg", 10);
 
     private static item[] allitems = {soda, curry, chugjug, apple, motherboard, glass, lucashair, masonhair, chag};
-    private static item[] belti = {apple, apple, apple, apple, apple, motherboard, chag};
-    private static item[] sted = {lucashair, apple, glass, apple, chugjug, soda, chag, chag};
-    private static item[] bi = {motherboard,motherboard,motherboard,apple,chugjug,glass};
 
     private static opponent goblin = new opponent("Goblin", 10, 2);
+    private static opponent goblin2 = new opponent("Goblin", 10, 2);
+    private static opponent goblin4 = new opponent("Goblin", 10, 2);
+    private static opponent goblin3 = new opponent("Goblin", 10, 2);
     private static opponent masonhairspray = new opponent("Mason's Hairspray", 5, 50);
-    private static boss belt = new boss("Belt of Rami", 40, 8, belti);
     private static opponent orc = new opponent("Orc", 20,52);
-    private static boss men = new boss("Men of Steds", 80, 15, sted);
-    private static boss beck = new boss("The Becker", 120, 25, bi);
     private static opponent slime = new opponent("Slime", 30, 3);
     private static opponent living_skeleton = new opponent("Skeleton", 15, 6);
-    private static opponent[] tl = {goblin, orc, slime, living_skeleton, masonhairspray};
+
+    private static opponent belt = new opponent("Belt of Rami", 40, 8);
+    private static opponent men = new opponent("Men of Steds", 80, 15);
+    private static opponent beck = new opponent("The Becker", 120, 25);
+
 
 
     public static int easte = 0; 
@@ -111,12 +112,14 @@ public class main {
     println("");
     println(opp.getName() + " approaches! ");
     println("");
+    idle(1);
     int ee = easte;
     while (play.getHealth() > 0 && opp.getHealth() > 0) {
 
         String oppact = opp.getAction();
-        String tes = null;
+        String tes = "";
         while (true) {
+            println("");
             println("What do you do? Enter a number. ");
             //gets player action
             play.showActions();
@@ -153,6 +156,7 @@ public class main {
 
         boolean consumedTurn = false; 
         //battle logic
+        println(tes);
         if ("Fight".equals(tes)) {
             println("You decided to fight! ");
             idle(1);
@@ -230,6 +234,48 @@ public class main {
             play.setHealth(Math.min(play.getMaxHealth(), play.getHealth() + healAmount));
             println("You healed " + healAmount + " health. ");
             println("You have " + play.getHealth() + " health left. ");
+            idle(1);
+
+            if ("Guard".equals(oppact)) {
+                println(opp.getName() + " guarded. ");
+                println("Nothing happened lol");
+            } else if ("Counter".equals(oppact)) {
+                println(opp.getName() + " countered. ");
+                println("But there was nothing to counter.");
+            } else { 
+                println(opp.getName() + " decided to fight. ");
+                play.setHealth(Math.max(0, play.getHealth() - oD));
+                idle(1);
+                println(opp.getName() + " dealt " + oD + " damage. ");
+                println("You have " + play.getHealth() + " health left. ");
+            }
+            consumedTurn = true;
+
+        } else if ("Use Item".equals(tes)) {
+            println("You decided to use an item. ");
+            idle(1);
+            while (true) {
+            println("What item do you use? Enter a number. ");
+            //gets player items
+            play.displayItems();
+            String line = bi.nextLine();
+            int choice;
+            try {
+                choice = Integer.parseInt(line.trim());
+                if (choice > 0 && choice <= play.getItemshad()) {
+                    play.useItem(choice);
+                    break; // valid input means leave input loop
+                } else { //doesn't accept invalid input
+                    println("That's not a valid choice buddy. ");
+                    sleep(2000);
+                    for (int i = 0; i < play.getItemshad() + 1; i++) cpl();
+                }
+            } catch (NumberFormatException ignored) { 
+                println("That's not a choice buddy.");
+                sleep(2000);
+                for (int i = 0; i <= play.hma() + 1; i++) cpl();
+            }
+        }
 
             if ("Guard".equals(oppact)) {
                 println(opp.getName() + " guarded. ");
@@ -295,7 +341,7 @@ public class main {
                     consumedTurn = false; 
                 }
             }
-        } else { 
+        } else {
             ee++;
             println("You decided to check the enemy");
             //doesnt consume turn to check
@@ -308,16 +354,21 @@ public class main {
                 idle(1);
                 cpl();
             }
+            idle(1);
+            println("When you are ready, press enter. ");
+            bi.nextLine();
         }
 
         if (!consumedTurn) {
-            for (int i = 0; i <= play.hma() + 1; i++) cpl();
+            for (int i = 0; i < play.hma() + 7; i++) cpl();
             continue;
             //clears if u didn't use an action
         }
         play.setHealth(Math.max(0, Math.min(play.getHealth(), play.getMaxHealth())));
         opp.setHealth(Math.max(0, opp.getHealth()));
         //makes sure health makes sense
+
+        idle(1);
     } 
 
     // result
@@ -349,6 +400,7 @@ public class main {
         easte = ee;
         return true;
     }
+    
 }
     //substitute print
     public static void main(String[] args) {
@@ -356,44 +408,45 @@ public class main {
         String temp = "";
         
         //dialogue
-        idle(1);
-        println("Hello! My name is Verity. I'm your personal helper friend!");
-        idle(3);
-        println("Ask me anything! I know everything!");
-        idle(3);
-        print("Except for your name... ");
-        idle(2);
-        println("I know! What is your name? ");
+        // idle(1);
+        // println("Hello! My name is Verity. I'm your personal helper friend!");
+        // idle(3);
+        // println("Ask me anything! I know everything!");
+        // idle(3);
+        // println("Except for your name... ");
+        // idle(2);
+        // cpl();
+        println("What is your name? ");
         String nam = input.nextLine();
-        idle(2);
-        println("Hello " + nam + "! That's a really nice name!");
-        idle(1);
-        println("Unfortunately, we are trapped in the local Chick Fil A right now, and there are 3 bosses ahead of us.");
-        idle(4);
-        println("You have the fearsome Belt of Rami,");
-        idle(2);
-        println("The battle hardened Men of Steds,");
-        idle(2);
-        println("And finally you face the indomitable Scottish Becker.");
-        idle(2);
+        // idle(2);
+        // println("Hello " + nam + "! That's a really nice name!");
+        // idle(1);
+        // println("Unfortunately, we are trapped in the local Chick-Fil-A right now, and there are 3 bosses ahead of us.");
+        // idle(4);
+        // println("You have the fearsome Belt of Rami,");
+        // idle(2);
+        // println("The battle hardened Men of Steds,");
+        // idle(2);
+        // println("And finally you face the indomitable Becker.");
+        // idle(2);
         player mc = new player(nam, 100, 100, 5);
-        idle(1);
-        println(mc.toString() + ", are you ready to face the trials set before you? ");
-        temp = input.nextLine();
-        if (temp.toLowerCase().contains("ye") || temp.toLowerCase().contains("uh")) println("Let us begin. ");
-        else{
-            idle(2);
-            println("Tf u mean nuh uh");
-            idle(1);
-            println("Too bad so sad.");
+        // idle(1);
+        // println(mc.toString() + ", are you ready to face the trials set before you? ");
+        // temp = input.nextLine();
+        // if (temp.toLowerCase().contains("ye") || temp.toLowerCase().contains("uh")) println("Let us begin. ");
+        // else{
+        //     idle(2);
+        //     println("Tf u mean nuh uh");
+        //     idle(1);
+        //     println("Too bad so sad.");
 
-        } 
+        // } 
 
         idle(2);
         println("Look Out!! A Goblin!! ");
         idle(2);
         
-        if (battle(mc, goblin, input)) {
+        if (battle(mc, goblin2, input)) {
             println("Phew. You made it.");
             idle(1);
 
@@ -401,7 +454,31 @@ public class main {
             println("How do u lose the first fight? ");
             System.exit(0); 
         }
-        
+
+        println("Well, might as well fight some more goblins to level up. ");
+        idle(1);
+        println("Hey, there's one right there! ");
+
+        if (battle(mc, goblin, input)) {
+            println("Good job!");
+            idle(1);
+        } else {
+            idle(2);
+            println("And you were finally startng to get good...");
+            System.exit(0);
+        }
+
+        println("Well, I think you can challenge the first boss now!");
+        idle(1);
+        println("Good luck!");
+
+        if (battle(mc, belt, input)) {
+            println("Yoo u beat the first boss!");
+            idle(1);
+        } else {
+            println("You lost.");
+            System.exit(0);
+        }
 
         
 

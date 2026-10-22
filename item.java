@@ -15,5 +15,9 @@ public class item {
         return boost;
     }
 
+    public String toString() {
+        return name + " that heals for " + boost;
+    } 
+
 
 }
