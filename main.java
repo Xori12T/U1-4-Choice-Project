@@ -109,6 +109,8 @@ public class main {
     public static boolean battle(player play, opponent opp, Scanner bi) {
     //main battle loop
     //uses the scanner bc creating another scanner would be inefficient
+    //yo i do NOT wanna comment allat, this function basically js does the main battle loop.
+
     println("");
     println(opp.getName() + " approaches! ");
     println("");
@@ -121,7 +123,7 @@ public class main {
         while (true) {
             println("");
             println("What do you do? Enter a number. ");
-            //gets player action
+            //gets player action from input
             play.showActions();
             String line = bi.nextLine();
 
@@ -155,7 +157,7 @@ public class main {
         
 
         boolean consumedTurn = false; 
-        //battle logic
+        //battle logic with player choice
         println(tes);
         if ("Fight".equals(tes)) {
             println("You decided to fight! ");
@@ -376,7 +378,7 @@ public class main {
         idle(1);
     } 
 
-    // result
+    // result of the fight, checks healths
     if (play.getHealth() <= 0) {
         println("Yo bro u lost.");
         idle(1);
@@ -413,6 +415,10 @@ public class main {
         String temp = "";
         
         //dialogue
+        //i lwk manually wrote this bc its like the only way to do this
+        //theres not rlly much customization here, u js follow ur assistant around the chick fil a
+        //if u lose the game ends.
+
         idle(1);
         println("Hello! My name is Verity. I'm your personal helper friend!");
         idle(3);
