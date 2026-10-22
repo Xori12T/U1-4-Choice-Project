@@ -344,8 +344,8 @@ public class main {
         play.setDamage(play.getDamage() + 10);
         idle(1);
         int tirv = (int)(Math.random()* allitems.length);
-        println("Item dropped: " + allitems[tirv]);
-        if (play.getItemshad() < 14) {}
+        println("Item dropped: " + allitems[tirv].getName());
+        play.addItem(allitems[tirv]); //no error handling here, all in player function
         easte = ee;
         return true;
     }

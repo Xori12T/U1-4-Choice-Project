@@ -71,6 +71,8 @@ public class boss {
 
     public void useItem() {
         int c = (int) (Math.random() * itlist.length);
+        this.setHealth(this.getHealth() + itlist[c].getBoost());
+        main.println(this.getName() + " consumed " + itlist[c].getName() + " and healed " + itlist[c].getBoost() + " health.");
         
     }
 

@@ -98,6 +98,7 @@ public class player {
     public void addItem(item i) {
         if (itemshad < 15) {
             items[itemshad] = i;
+            main.println("You got a " + i.getName() + "!");
         } else {
             main.println("Your item storage is full. ");
         }
