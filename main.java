@@ -254,28 +254,33 @@ public class main {
         } else if ("Use Item".equals(tes)) {
             println("You decided to use an item. ");
             idle(1);
-            while (true) {
-            println("What item do you use? Enter a number. ");
-            //gets player items
-            play.displayItems();
-            String line = bi.nextLine();
-            int choice;
-            try {
-                choice = Integer.parseInt(line.trim());
-                if (choice > 0 && choice <= play.getItemshad()) {
-                    play.useItem(choice);
-                    break; // valid input means leave input loop
-                } else { //doesn't accept invalid input
-                    println("That's not a valid choice buddy. ");
-                    sleep(2000);
-                    for (int i = 0; i < play.getItemshad() + 1; i++) cpl();
-                }
-            } catch (NumberFormatException ignored) { 
-                println("That's not a choice buddy.");
-                sleep(2000);
-                for (int i = 0; i <= play.hma() + 1; i++) cpl();
+            if (play.getItemshad() < 1) {
+                println("But you didn't have any items to use");
+                break;
             }
-        }
+            
+            while (true) {
+                println("What item do you use? Enter a number. ");
+                //gets player items
+                play.displayItems();
+                String line = bi.nextLine();
+                int choice;
+                try {
+                    choice = Integer.parseInt(line.trim());
+                    if (choice > 0 && choice <= play.getItemshad()) {
+                        play.useItem(choice);
+                        break; // valid input means leave input loop
+                    } else { //doesn't accept invalid input
+                        println("That's not a valid choice buddy. ");
+                        sleep(2000);
+                        for (int i = 0; i < play.getItemshad() + 1; i++) cpl();
+                    }
+                } catch (NumberFormatException ignored) { 
+                    println("That's not a choice buddy.");
+                    sleep(2000);
+                    for (int i = 0; i <= play.getItemshad() + 1; i++) cpl();
+                }
+            }
 
             if ("Guard".equals(oppact)) {
                 println(opp.getName() + " guarded. ");
@@ -408,39 +413,39 @@ public class main {
         String temp = "";
         
         //dialogue
-        // idle(1);
-        // println("Hello! My name is Verity. I'm your personal helper friend!");
-        // idle(3);
-        // println("Ask me anything! I know everything!");
-        // idle(3);
-        // println("Except for your name... ");
-        // idle(2);
-        // cpl();
+        idle(1);
+        println("Hello! My name is Verity. I'm your personal helper friend!");
+        idle(3);
+        println("Ask me anything! I know everything!");
+        idle(3);
+        println("Except for your name... ");
+        idle(2);
+        cpl();
         println("What is your name? ");
         String nam = input.nextLine();
-        // idle(2);
-        // println("Hello " + nam + "! That's a really nice name!");
-        // idle(1);
-        // println("Unfortunately, we are trapped in the local Chick-Fil-A right now, and there are 3 bosses ahead of us.");
-        // idle(4);
-        // println("You have the fearsome Belt of Rami,");
-        // idle(2);
-        // println("The battle hardened Men of Steds,");
-        // idle(2);
-        // println("And finally you face the indomitable Becker.");
-        // idle(2);
+        idle(2);
+        println("Hello " + nam + "! That's a really nice name!");
+        idle(1);
+        println("Unfortunately, we are trapped in the local Chick-Fil-A right now, and there are 3 bosses ahead of us.");
+        idle(4);
+        println("You have the fearsome Belt of Rami,");
+        idle(2);
+        println("The battle hardened Men of Steds,");
+        idle(2);
+        println("And finally you face the indomitable Becker.");
+        idle(2);
         player mc = new player(nam, 100, 100, 5);
-        // idle(1);
-        // println(mc.toString() + ", are you ready to face the trials set before you? ");
-        // temp = input.nextLine();
-        // if (temp.toLowerCase().contains("ye") || temp.toLowerCase().contains("uh")) println("Let us begin. ");
-        // else{
-        //     idle(2);
-        //     println("Tf u mean nuh uh");
-        //     idle(1);
-        //     println("Too bad so sad.");
+        idle(1);
+        println(mc.toString() + ", are you ready to face the trials set before you? ");
+        temp = input.nextLine();
+        if (temp.toLowerCase().contains("ye") || temp.toLowerCase().contains("uh")) println("Let us begin. ");
+        else{
+            idle(2);
+            println("Tf u mean nuh uh");
+            idle(1);
+            println("Too bad so sad.");
 
-        // } 
+        } 
 
         idle(2);
         println("Look Out!! A Goblin!! ");
@@ -479,6 +484,59 @@ public class main {
             println("You lost.");
             System.exit(0);
         }
+
+        println("Uh, i dunno, fight another goblin or smth.");
+        if (battle(mc, goblin3, input)) {
+            println("yay u did it. ");
+            idle(1);
+        } else {
+            println("You lost.");
+            System.exit(0);
+        }
+
+        println("Don't you think this is getting repetitive or is it just me writing this at 12:53 AM?");
+        idle(2);
+        println("Ehh, best not get too deep into it. ");
+        idle(1);
+        println("Oh look, something new to fight! It's an orc. ");
+        
+        if (battle(mc, orc, input)) {
+            println("yay u did it. (slowed + reverb)");
+            idle(1);
+        } else {
+            println("You lost to a new thing.");
+            System.exit(0);
+        }
+
+        println("... if you think about it, saying an orc quickly sounds like anork");
+        idle(1);
+        println("and anork means nothing in latin. this is because i made that word up.");
+        idle(1);
+        println("OH ...oops, uh didn't see u there. ");
+        idle(2);
+        println("uh... Look over there!");
+
+        if (battle(mc, masonhairspray, input)) {
+            println("What even was that?");
+            idle(1);
+        } else {
+            println("You lost to Mason's Hair Spray.");
+            System.exit(0);
+        }
+
+        println("Ok, I think you're ready to fight the second boss. ");
+        if (battle(mc, men, input)) {
+            println("Good job! You beat the men of steds!");
+            idle(1);
+        } else {
+            println("You lost to the men of steds.");
+            System.exit(0);
+        }
+
+
+
+
+        
 
         
 
